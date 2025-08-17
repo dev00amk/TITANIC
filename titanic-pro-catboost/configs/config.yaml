@@ -1,0 +1,6 @@
+defaults:
+  - train
+  - _self_
+
+# Override patterns
+# @package _global_

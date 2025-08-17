@@ -1,0 +1,82 @@
+# Feature groups for ablation studies
+feature_groups:
+  basic:
+    - "Pclass"
+    - "Sex"
+    - "Age"
+    - "SibSp" 
+    - "Parch"
+    - "Fare"
+    - "Embarked"
+  
+  titles:
+    - "Title"
+    - "Title_Pclass"
+    - "Title_SurvivalRate"
+  
+  family:
+    - "FamilySize"
+    - "IsAlone"
+    - "HasSiblings"
+    - "HasParents"
+    - "HasChildren"
+    - "FamilyID"
+  
+  cabin:
+    - "CabinDeck"
+    - "HasCabin"
+    - "CabinDeck_SurvivalRate"
+  
+  interactions:
+    - "Sex_Pclass"
+    - "AgeGroup_Pclass"
+    - "FamilySize_Pclass"
+    - "Embarked_Pclass"
+  
+  age_features:
+    - "AgeGroup"
+    - "AgeBin"
+    - "IsChild"
+  
+  ticket:
+    - "TicketPrefix"
+    - "TicketHasLetters"
+    - "TicketPrefix_SurvivalRate"
+  
+  target_encoded:
+    - "Title_SurvivalRate"
+    - "CabinDeck_SurvivalRate" 
+    - "TicketPrefix_SurvivalRate"
+    - "Sex_Pclass_SurvivalRate"
+    - "AgeGroup_Pclass_SurvivalRate"
+
+# Column ordering for deterministic output
+column_order:
+  - "PassengerId"
+  - "Pclass"
+  - "PclassStr"
+  - "Sex"
+  - "Age"
+  - "SibSp"
+  - "Parch"
+  - "Fare"
+  - "Embarked"
+  - "Title"
+  - "CabinDeck"
+  - "HasCabin"
+  - "TicketPrefix"
+  - "TicketHasLetters"
+  - "FamilySize"
+  - "IsAlone"
+  - "HasSiblings"
+  - "HasParents"
+  - "HasChildren"
+  - "FamilyID"
+  - "AgeGroup"
+  - "AgeBin"
+  - "IsChild"
+  - "Sex_Pclass"
+  - "Title_Pclass"
+  - "AgeGroup_Pclass"
+  - "FamilySize_Pclass"
+  - "Embarked_Pclass"

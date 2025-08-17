@@ -1,0 +1,64 @@
+# Training configuration
+seed: 42
+folds: 5
+seeds: [11, 23, 42, 77, 101]
+alpha_smoothing: 10
+validation_metric: "accuracy"
+
+catboost:
+  iterations: 6000
+  learning_rate: 0.035
+  depth: 6
+  l2_leaf_reg: 8
+  bagging_temperature: 0.2
+  random_strength: 0.2
+  border_count: 254
+  loss_function: "Logloss"
+  eval_metric: "Logloss"
+  od_wait: 600
+  verbose: 200
+  allow_writing_files: false
+  grow_policy: "SymmetricTree"
+  auto_class_weights: "Balanced"
+
+paths:
+  data_dir: "data/raw"
+  artifacts: "artifacts"
+
+mlflow:
+  tracking_uri: "file:./mlruns"
+  experiment: "titanic-pro-catboost"
+
+# Feature engineering
+features:
+  title_mapping:
+    standard: ["Mr", "Mrs", "Miss", "Master"]
+    nobility: ["Lady", "Sir", "Countess"]
+    officer: ["Capt", "Col", "Major"]
+    professional: ["Dr", "Rev"]
+    rare: ["Don", "Dona", "Jonkheer"]
+  
+  deck_mapping:
+    upper: ["A", "B", "C"]
+    middle: ["D", "E"]
+    lower: ["F", "G"]
+    other: ["T"]
+  
+  age_bins: [0, 12, 18, 30, 50, 65, 100]
+  age_labels: ["Child", "Teen", "YoungAdult", "Adult", "Senior", "Elderly"]
+  
+  target_encoding_features:
+    - "Title"
+    - "Sex"
+    - "PclassStr"
+    - "TicketPrefix"
+    - "CabinDeck"
+    - "Sex_Pclass"
+    - "Title_Pclass"
+    - "AgeGroup_Pclass"
+
+# Data validation
+validation:
+  age_range: [0, 100]
+  fare_min: 0
+  required_columns: ["PassengerId", "Pclass", "Name", "Sex", "Embarked"]

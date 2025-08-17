@@ -1,0 +1,58 @@
+# Titanic dataset configuration
+dataset:
+  name: "titanic"
+  version: "1.0"
+  description: "Titanic passenger survival dataset"
+
+# Data paths
+paths:
+  train_file: "data/raw/train.csv"
+  test_file: "data/raw/test.csv"
+  processed_train: "data/processed/train_processed.csv"
+  processed_test: "data/processed/test_processed.csv"
+  submission_file: "outputs/submission.csv"
+
+# Data validation
+validation:
+  schema_validation: true
+  quality_checks: true
+  drift_detection: true
+  
+# Preprocessing configuration
+preprocessing:
+  # Missing value handling
+  imputation:
+    age_strategy: "median"
+    fare_strategy: "median"
+    embarked_strategy: "mode"
+    
+  # Feature engineering
+  feature_engineering:
+    create_family_size: true
+    create_is_alone: true
+    create_title_from_name: true
+    create_age_groups: true
+    create_fare_groups: true
+    tokenize_names: true
+    process_tickets: true
+    
+  # Encoding
+  encoding:
+    categorical_features:
+      - "Sex"
+      - "Embarked"
+      - "Title"
+    ordinal_features:
+      - "Pclass"
+    
+# Data quality thresholds
+quality:
+  max_missing_ratio: 0.5
+  min_unique_values: 2
+  max_cardinality: 100
+  
+# Train/validation split
+split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true

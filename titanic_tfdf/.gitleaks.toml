@@ -1,0 +1,73 @@
+# Gitleaks configuration for secret detection
+title = "Gitleaks Configuration for Titanic Enterprise"
+
+[extend]
+# Extend default rules
+useDefault = true
+
+[[rules]]
+description = "AWS Access Key ID"
+id = "aws-access-key-id"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+description = "AWS Secret Access Key"
+id = "aws-secret-access-key"
+regex = '''[A-Za-z0-9/+=]{40}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+description = "MLflow Tracking URI with credentials"
+id = "mlflow-credentials"
+regex = '''mlflow.*://.*:.*@'''
+tags = ["credentials", "MLflow"]
+
+[[rules]]
+description = "Database connection string"
+id = "database-connection"
+regex = '''(mysql|postgresql|mongodb)://.*:.*@'''
+tags = ["credentials", "database"]
+
+[[rules]]
+description = "API Keys"
+id = "api-key"
+regex = '''(?i)(api[_-]?key|apikey)['"]*\s*[:=]\s*['"][a-z0-9]{20,}['"]'''
+tags = ["key", "API"]
+
+[[rules]]
+description = "Private Keys"
+id = "private-key"
+regex = '''-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----'''
+tags = ["key", "private"]
+
+# Allowlist for false positives
+[allowlist]
+description = "Allowlisted files and patterns"
+files = [
+    '''\.md$''',
+    '''\.txt$''',
+    '''\.yaml$''',
+    '''\.yml$''',
+    '''test_.*\.py$''',
+    '''conftest\.py$''',
+]
+
+paths = [
+    '''tests/''',
+    '''docs/''',
+    '''.github/''',
+]
+
+# Allowlist specific patterns that are not secrets
+regexes = [
+    '''example\.com''',
+    '''localhost''',
+    '''127\.0\.0\.1''',
+    '''0\.0\.0\.0''',
+    '''placeholder''',
+    '''dummy''',
+    '''fake''',
+    '''test''',
+    '''mock''',
+]

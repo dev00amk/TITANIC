@@ -1,0 +1,50 @@
+# Baseline experiment configuration
+experiment:
+  name: "baseline_tfdf"
+  description: "Baseline TensorFlow Decision Forests model"
+  tags:
+    - "baseline"
+    - "tfdf"
+    - "gradient_boosted_trees"
+  
+# Experiment tracking
+tracking:
+  log_model: true
+  log_artifacts: true
+  log_metrics: true
+  log_params: true
+  
+# Model registration
+registry:
+  register_model: true
+  model_name: "titanic_tfdf_baseline"
+  stage: "Staging"
+  
+# Evaluation
+evaluation:
+  cross_validation:
+    enabled: true
+    cv_folds: 5
+    scoring: "accuracy"
+    
+  metrics:
+    - name: "accuracy"
+      threshold: 0.80
+    - name: "precision"
+      threshold: 0.75
+    - name: "recall"
+      threshold: 0.75
+    - name: "f1_score"
+      threshold: 0.77
+    - name: "auc_roc"
+      threshold: 0.85
+      
+# Reproducibility
+reproducibility:
+  set_seeds: true
+  deterministic: true
+  
+# Resource limits
+resources:
+  max_memory_gb: 4
+  max_training_time_minutes: 30
