@@ -18,6 +18,13 @@ from titanic_enterprise.utils.file_utils import (
     load_dataframe,
     get_project_root,
 )
+from titanic_enterprise.utils.validation import (
+    validate_dataframe_schema,
+    validate_data_quality,
+    validate_titanic_data,
+    validate_predictions,
+    validate_model_metrics,
+)
 
 __all__ = [
     "load_config",
@@ -35,4 +42,9 @@ __all__ = [
     "save_dataframe",
     "load_dataframe",
     "get_project_root",
+    "validate_dataframe_schema",
+    "validate_data_quality",
+    "validate_titanic_data",
+    "validate_predictions",
+    "validate_model_metrics",
 ]
